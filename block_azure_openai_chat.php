@@ -47,7 +47,7 @@ class block_azure_openai_chat extends block_base {
         $assistantname = get_config('block_azure_openai_chat', 'assistantname') ? get_config('block_azure_openai_chat', 'assistantname') : get_string('defaultassistantname', 'block_azure_openai_chat');
         $username = get_config('block_azure_openai_chat', 'username') ? get_config('block_azure_openai_chat', 'username') : get_string('defaultusername', 'block_azure_openai_chat');
 
-        $this->page->requires->js_call_amd('block_azure_openai_chat/chatlib', 'init', [$sourceoftruth, $username, $assistantname]);        
+        $this->page->requires->js_call_amd('block_azure_openai_chat/chatlib', 'init', [$sourceoftruth, $username, $assistantname]);
 
         // Determine if name labels should be shown.
         $showlabelscss = '';
@@ -65,6 +65,16 @@ class block_azure_openai_chat extends block_base {
 
         $this->content = new stdClass;
         $this->content->text = '
+            <style>
+                ' . $showlabelscss . '
+                .azure_openai_message.user:before {
+                    content: "' . $username . '";
+                }
+                .azure_openai_message.bot:before {
+                    content: "' . $assistantname . '";
+                }
+            </style>
+
             <div id="azure_openai_chat_log"></div>
         ';
 
