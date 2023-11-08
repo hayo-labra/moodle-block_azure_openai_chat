@@ -17,12 +17,12 @@
 /**
  * Base completion object class
  *
- * @package    block_openai_chat
+ * @package    block_azure_openai_chat
  * @copyright  2023 Bryce Yoder <me@bryceyoder.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 */
 
-namespace block_openai_chat;
+namespace block_azure_openai_chat;
 defined('MOODLE_INTERNAL') || die;
 
 class completion {
@@ -45,10 +45,11 @@ class completion {
      * @param string localsourceoftruth: The instance-level source of truth we got from the API call
      */
     public function __construct($model, $message, $history, $localsourceoftruth) {
-        $this->apikey = get_config('block_openai_chat', 'apikey');
-        $this->prompt = $this->get_setting('prompt', get_string('defaultprompt', 'block_openai_chat'));
-        $this->assistantname = $this->get_setting('assistantname', get_string('defaultassistantname', 'block_openai_chat'));
-        $this->username = $this->get_setting('username', get_string('defaultusername', 'block_openai_chat'));
+        $this->apikey = get_config('block_azure_openai_chat', 'apikey');
+        $this->endpoint = get_config('block_azure_openai_chat', 'endpoint');
+        $this->prompt = $this->get_setting('prompt', get_string('defaultprompt', 'block_azure_openai_chat'));
+        $this->assistantname = $this->get_setting('assistantname', get_string('defaultassistantname', 'block_azure_openai_chat'));
+        $this->username = $this->get_setting('username', get_string('defaultusername', 'block_azure_openai_chat'));
 
         $this->model = $model;
         $this->message = $message;
@@ -64,7 +65,7 @@ class completion {
      * @return mixed: The saved or default value
      */
     protected function get_setting($settingname, $default_value) {
-        $setting = get_config('block_openai_chat', $settingname);
+        $setting = get_config('block_azure_openai_chat', $settingname);
         if (!$setting && (float) $setting != 0) {
             $setting = $default_value;
         }
@@ -76,11 +77,11 @@ class completion {
      * @param string localsourceoftruth: The instance-level source of truth we got from the API call 
      */
     private function build_source_of_truth($localsourceoftruth) {
-        $sourceoftruth = get_config('block_openai_chat', 'sourceoftruth');
+        $sourceoftruth = get_config('block_azure_openai_chat', 'sourceoftruth');
     
         if ($sourceoftruth || $localsourceoftruth) {
             $sourceoftruth = 
-                get_string('sourceoftruthpreamble', 'block_openai_chat')
+                get_string('sourceoftruthpreamble', 'block_azure_openai_chat')
                 . $sourceoftruth . "\n\n"
                 . $localsourceoftruth . "\n\n";
             }

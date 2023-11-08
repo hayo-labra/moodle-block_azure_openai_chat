@@ -17,17 +17,17 @@
 /**
  * Class providing completions for chat models (3.5 and up)
  *
- * @package    block_openai_chat
+ * @package    block_azure_openai_chat
  * @copyright  2023 Bryce Yoder <me@bryceyoder.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 */
 
-namespace block_openai_chat\completion;
+namespace block_azure_openai_chat\completion;
 
-use block_openai_chat\completion;
+use block_azure_openai_chat\completion;
 defined('MOODLE_INTERNAL') || die;
 
-class chat extends \block_openai_chat\completion {
+class chat extends \block_azure_openai_chat\completion {
 
     public function __construct($model, $message, $history, $localsourceoftruth) {
         parent::__construct($model, $message, $history, $localsourceoftruth);
@@ -35,11 +35,11 @@ class chat extends \block_openai_chat\completion {
 
     /**
      * Given everything we know after constructing the parent, create a completion by constructing the prompt and making the api call
-     * @return JSON: The API response from OpenAI
+     * @return JSON: The API response from Azure OpenAI
      */
     public function create_completion() {
         if ($this->sourceoftruth) {
-            $this->prompt .= get_string('sourceoftruthreinforcement', 'block_openai_chat');
+            $this->prompt .= get_string('sourceoftruthreinforcement', 'block_azure_openai_chat');
         }
         $this->prompt .= "\n\n";
 
@@ -66,8 +66,8 @@ class chat extends \block_openai_chat\completion {
     }
 
     /**
-     * Make the actual API call to OpenAI
-     * @return JSON: The response from OpenAI
+     * Make the actual API call to Azure OpenAI
+     * @return JSON: The response from Azure OpenAI
      */
     private function make_api_call($history) {
         $temperature = $this->get_setting('temperature', 0.5);
@@ -90,12 +90,12 @@ class chat extends \block_openai_chat\completion {
         $curl = new \curl();
         $curl->setopt(array(
             'CURLOPT_HTTPHEADER' => array(
-                'Authorization: Bearer ' . $this->apikey,
+                'api-key: ' . $this->apikey,
                 'Content-Type: application/json'
             ),
         ));
 
-        $response = $curl->post("https://api.openai.com/v1/chat/completions", json_encode($curlbody));
+        $response = $curl->post("https://$this->endpoint/openai/deployments/$this->model/chat/completions?api-version=2023-05-15", json_encode($curlbody));
         return $response;
     }
 }

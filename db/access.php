@@ -17,7 +17,7 @@
 /**
  * Define capabilities
  *
- * @package    block_openai_chat
+ * @package    block_azure_openai_chat
  * @copyright  2022 Bryce Yoder <me@bryceyoder.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
 
-    'block/openai_chat:myaddinstance' => array(
+    'block/azure_openai_chat:myaddinstance' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
@@ -36,7 +36,7 @@ $capabilities = array(
         'clonepermissionsfrom' => 'moodle/my:manageblocks'
     ),
 
-    'block/openai_chat:addinstance' => array(
+    'block/azure_openai_chat:addinstance' => array(
         'riskbitmask' => RISK_SPAM | RISK_XSS,
 
         'captype' => 'write',

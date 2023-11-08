@@ -17,14 +17,14 @@
 /**
  * Block class
  *
- * @package    block_openai_chat
+ * @package    block_azure_openai_chat
  * @copyright  2022 Bryce Yoder <me@bryceyoder.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-class block_openai_chat extends block_base {
+class block_azure_openai_chat extends block_base {
     public function init() {
-        $this->title = get_string('openai_chat', 'block_openai_chat');
+        $this->title = get_string('azure_openai_chat', 'block_azure_openai_chat');
     }
 
     public function has_config() {
@@ -44,48 +44,33 @@ class block_openai_chat extends block_base {
 
         $sourceoftruth = !empty($this->config) && $this->config->sourceoftruth ? $this->config->sourceoftruth : '';
 
-        $this->page->requires->js('/blocks/openai_chat/lib.js');
-        $this->page->requires->js_init_call('init', [$sourceoftruth]);
+        $assistantname = get_config('block_azure_openai_chat', 'assistantname') ? get_config('block_azure_openai_chat', 'assistantname') : get_string('defaultassistantname', 'block_azure_openai_chat');
+        $username = get_config('block_azure_openai_chat', 'username') ? get_config('block_azure_openai_chat', 'username') : get_string('defaultusername', 'block_azure_openai_chat');
+
+        $this->page->requires->js_call_amd('block_azure_openai_chat/chatlib', 'init', [$sourceoftruth, $username, $assistantname]);        
 
         // Determine if name labels should be shown.
         $showlabelscss = '';
         if (!empty($this->config) && !$this->config->showlabels) {
             $showlabelscss = '
-                .openai_message:before {
+                .azure_openai_message:before {
                     display: none;
                 }
-                .openai_message {
+                .azure_openai_message {
                     margin-bottom: 0.5rem;
                 }
             ';
         }
 
-        $assistantname = get_config('block_openai_chat', 'assistantname') ? get_config('block_openai_chat', 'assistantname') : get_string('defaultassistantname', 'block_openai_chat');
-        $username = get_config('block_openai_chat', 'username') ? get_config('block_openai_chat', 'username') : get_string('defaultusername', 'block_openai_chat');
 
         $this->content = new stdClass;
         $this->content->text = '
-            <script>
-                var assistantName = "' . $assistantname . '";
-                var userName = "' . $username . '";
-            </script>
-
-            <style>
-                ' . $showlabelscss . '
-                .openai_message.user:before {
-                    content: "' . $username . '";
-                }
-                .openai_message.bot:before {
-                    content: "' . $assistantname . '";
-                }
-            </style>
-
-            <div id="openai_chat_log"></div>
+            <div id="azure_openai_chat_log"></div>
         ';
 
-        $this->content->footer = get_config('block_openai_chat', 'apikey') ? '
-            <input id="openai_input" placeholder="' . get_string('askaquestion', 'block_openai_chat') .'" type="text" name="message" />'
-        : get_string('apikeymissing', 'block_openai_chat');
+        $this->content->footer = get_config('block_azure_openai_chat', 'apikey') ? '
+            <input id="azure_openai_input" placeholder="' . get_string('askaquestion', 'block_azure_openai_chat') .'" type="text" name="message" />'
+        : get_string('apikeymissing', 'block_azure_openai_chat');
 
         return $this->content;
     }

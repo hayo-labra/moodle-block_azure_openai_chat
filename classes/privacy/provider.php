@@ -17,12 +17,12 @@
 /**
  * Privacy API Provider
  *
- * @package    block_openai_chat
+ * @package    block_azure_openai_chat
  * @copyright  2022 Bryce Yoder <me@bryceyoder.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace block_openai_chat\privacy;
+namespace block_azure_openai_chat\privacy;
 
 class provider implements
     // This plugin does not store any personal user data.

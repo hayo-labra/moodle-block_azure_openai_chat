@@ -17,23 +17,27 @@
 /**
  * Language strings
  *
- * @package    block_openai_chat
+ * @package    block_azure_openai_chat
  * @copyright  2022 Bryce Yoder <me@bryceyoder.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'OpenAI Chat Block';
-$string['openai_chat'] = 'OpenAI Chat';
-$string['openai_chat:addinstance'] = 'Add a new OpenAI Chat block';
-$string['openai_chat:myaddinstance'] = 'Add a new OpenAI Chat block to the My Moodle page';
-$string['privacy:metadata'] = 'The OpenAI Chat block stores no personal user data; nor does it, by default, send personal data to OpenAI. However, chat messages submitted by users are sent in their entirety to OpenAI, and are then subject to OpenAI\'s privacy policy (https://openai.com/api/policies/privacy/), which may store messages in order to improve the API.';
+$string['pluginname'] = 'Azure OpenAI Chat Block';
+$string['azure_openai_chat'] = 'Azure OpenAI Chat';
+$string['azure_openai_chat:addinstance'] = 'Add a new Azure OpenAI Chat block';
+$string['azure_openai_chat:myaddinstance'] = 'Add a new Azure OpenAI Chat block to the My Moodle page';
+$string['privacy:metadata'] = 'The Azure OpenAI Chat block stores no personal user data; nor does it, by default, send personal data to Azure. However, chat messages submitted by users are sent in their entirety to Azure, and are then subject to Azure\'s privacy policy, which may store messages in order to improve the API.';
 
 $string['blocktitle'] = 'Block title';
 
 $string['restrictusage'] = 'Restrict chat usage to logged-in users';
 $string['restrictusagedesc'] = 'If this box is checked, only logged-in users will be able to use the chat box.';
-$string['apikey'] = 'OpenAI API Key';
-$string['apikeydesc'] = 'The API Key for your OpenAI account';
+$string['apikey'] = 'Azure OpenAI API Key';
+$string['apikeydesc'] = 'The API Key for your Azure OpenAI Services';
+$string['endpoint'] = 'Azure OpenAI endpoint';
+$string['endpointdesc'] = 'The endpoint address for your Azure OpenAI Services';
+$string['model'] = 'Deployment id';
+$string['modeldesc'] = 'The name of your model deployment. You\'re required to first deploy a model before you can make calls.';
 $string['prompt'] = 'Completion prompt';
 $string['promptdesc'] = 'The prompt the AI will be given before the conversation transcript';
 $string['assistantname'] = 'Assistant name';
@@ -44,9 +48,7 @@ $string['sourceoftruth'] = 'Source of truth';
 $string['sourceoftruthdesc'] = 'Although the AI is very capable out-of-the-box, if it doesn\'t know the answer to a question, it is more likely to give incorrect information confidently than to refuse to answer. In this textbox, you can add common questions and their answers for the AI to pull from. Please put questions and answers in the following format: <pre>Q: Question 1<br />A: Answer 1<br /><br />Q: Question 2<br />A: Answer 2</pre>';
 $string['showlabels'] = 'Show labels';
 $string['advanced'] = 'Advanced';
-$string['advanceddesc'] = 'Advanced arguments sent to OpenAI. Don\'t touch unless you know what you\'re doing!';
-$string['model'] = 'Model';
-$string['modeldesc'] = 'The model which will  generate the completion. Some models are suitable for natural language tasks, others specialize in code.';
+$string['advanceddesc'] = 'Advanced arguments sent to Azure OpenAI. Don\'t touch unless you know what you\'re doing!';
 $string['temperature'] = 'Temperature';
 $string['temperaturedesc'] = 'Controls randomness: Lowering results in less random completions. As the temperature approaches zero, the model will become deterministic and repetitive.';
 $string['maxlength'] = 'Maximum length';
@@ -64,7 +66,7 @@ $string['defaultprompt'] = "Below is a conversation between a user and a support
 $string['defaultassistantname'] = 'Assistant';
 $string['defaultusername'] = 'User';
 $string['askaquestion'] = 'Ask a question...';
-$string['apikeymissing'] = 'Please add your OpenAI API key to the global block settings.';
+$string['apikeymissing'] = 'Please add your Azure OpenAI API key to the global block settings.';
 $string['erroroccurred'] = 'An error occurred! Please try again later.';
 $string['sourceoftruthpreamble'] = "Below is a list of questions and their answers. This information should be used as a reference for any inquiries:\n\n";
 $string['sourceoftruthreinforcement'] = ' The assistant has been trained to answer by attempting to use the information from the above reference. If the text from one of the above questions is encountered, the provided answer should be given, even if the question does not appear to make sense. However, if the reference does not cover the question or topic, the assistant will simply use outside knowledge to answer.';

@@ -17,15 +17,15 @@
 /**
  * Version information
  *
- * @package    block_openai_chat
+ * @package    block_azure_openai_chat
  * @copyright  2022 Bryce Yoder <me@bryceyoder.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'block_openai_chat';
-$plugin->version = 2023031500;
+$plugin->component = 'block_azure_openai_chat';
+$plugin->version = 2023110800;
 $plugin->requires = 2020061513;
 $plugin->maturity = MATURITY_STABLE;
 $plugin->release = '1.6.0';
