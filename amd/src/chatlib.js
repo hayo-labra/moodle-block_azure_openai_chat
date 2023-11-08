@@ -3,7 +3,7 @@ var errorString;
 var userName;
 var assistantName;
 
-export const init = (Y, sourceOfTruth, user, assistant) => {
+export const init = (sourceOfTruth, user, assistant) => {
 
     document.querySelector('#azure_openai_input').addEventListener('keyup', e => {
         if (e.which === 13 && e.target.value !== "") {
@@ -51,7 +51,7 @@ const addToChatLog = (type, message) => {
 
 const createCompletion = (message, sourceOfTruth) => {
     /**
-     * Makes an API request to get a completion from GPT-3, and adds it to the chat log
+     * Makes an API request to get a completion, and adds it to the chat log
      * @param {string} message The text to get a completion for
      */
     const history = buildTranscript();
